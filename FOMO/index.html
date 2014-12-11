@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>FOMO</title>
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimal-ui"> 
+        <meta name="apple-mobile-web-app-capable" content="yes"> 
+        <meta name="mobile-web-app-capable" content="yes">   
+
+        <!-- Moment -->
+        <script type="text/javascript" src="js/moment.js"></script>
+        <script type="text/javascript" src="js/moment-timezone.js"></script>     
+        
+        <!-- JQuery Mobile -->
+        <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
+
+        <!-- Telephone Widget -->
+        <link rel="stylesheet" href="js/intl-tel-input-master/build/css/intlTelInput.css">
+        <script src="js/intl-tel-input-master/build/js/intlTelInput.min.js"></script>
+
+        <!-- Google Places -->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places"></script>
+
+        <!-- JS -->
+        <script type="text/javascript" src="js/listeners.js"></script>
+        <script type="text/javascript" src="js/connections.js"></script>
+        <script type="text/javascript" src="js/googletech.js"></script>
+        <!-- PAGE -->
+        <script type="text/javascript" src="js/page.js"></script>
+        <script type="text/javascript" src="js/welcome.js"></script>
+        <script type="text/javascript" src="js/signup.js"></script>
+        <script type="text/javascript" src="js/signin.js"></script>
+        <script type="text/javascript" src="js/where.js"></script>
+        <script type="text/javascript" src="js/who.js"></script>
+
+        <!-- VIRGIL -->
+        <script type="text/javascript" src="js/virgil/virgil.js"></script>
+        <script type="text/javascript" src="js/virgil/virgil-connections.js"></script>
+
+        <!-- PHONEGAP -->
+        <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/virgil/phonegap_init.js"></script>
+        <!-- PUSH -->
+        <script type="text/javascript" src="PushNotification.js"></script>
+        <script type="text/javascript" src="js/virgil/pushwoosh.js"></script>
+        <script type="text/javascript" src="js/virgil/pushwoosh_android.js"></script>
+        <script type="text/javascript" src="js/virgil/pushwoosh_ios.js"></script>
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="jquery.mobile.icons.min.css" />
+        <link rel="stylesheet" href="style.css" />
+
+    </head>
+    <body>
+
+        <div id="welcomePage" class="page" data-role="page">
+            <div id="welcomeContent" class="content" >
+                <h1 id="welcomeText" class="title">
+                    hello
+                </h1>
+                <a id="welcomeSignup" class="button" href="#signupPage" data-role="button" tabindex="1">sign up</a>
+                <a id="welcomeSignin" class="button" href="#signinPage" data-role="button" tabindex="2">sign in</a>
+            </div>
+        </div>
+
+        <div id="signupPage" class="page" data-role="page">
+            <div id="header">
+                <div id="headerControl" style="margin-top:15px;" class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+                    <a class="backButton" href="#welcomePage" ><---</a>
+                </div>
+            </div>
+            <div id="signupContent" class="content" >
+                <h1 id="signupText" class="title">
+                    sign up
+                </h1>
+                <p id="signupError"  class="error"></p>
+                <form method="post" accept-charset=utf-8 data-ajax="false" action="" data-type="json" id="signupform" autocomplete="off">
+                    <div id="signupNames" class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <input id="signupFirstName" class="search" placeholder="first name" type="text" tabindex="1">
+                        </div>
+                        <div class="ui-block-b">
+                            <input id="signupLastName" class="search" placeholder="last name" type="text" tabindex="2">
+                        </div>
+                    </div>
+                    <input id="signupEmail" class="search" placeholder="email" type="email" tabindex="3">
+                    <input id="signupTelephone" class="search" placeholder="phone" type="tel" tabindex="4">
+                    <input id="signupPIN" class="search" placeholder="4 digit PIN" type="tel" tabindex="5" maxlength="4">
+                    <input id="signupPINConfirm" class="search" placeholder="confirm PIN" type="tel" tabindex="6" maxlength="4">
+                </form>
+                <a id="signupNextButton" class="button" data-role="button" tabindex="4" onclick="signupButtonClick()">sign up</a>
+            </div>
+            <div id="signupPopup" data-role="popup" data-history="false" class="popup" data-overlay-theme="a">
+                <h2 id="signupPopupHeader" >sorry</h2>
+                <p id="signupPopupText1"></p>
+                <a id="signupPopupButton" class="button" data-role="button" onclick='$("#signupPopup").popup("close");'>okay</a>
+            </div>
+        </div>
+
+        <div id="signinPage" class="page" data-role="page">
+            <div id="header">
+                <div id="headerControl" style="margin-top:15px;" class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+                    <a class="backButton" href="#welcomePage" ><---</a>
+                </div>
+            </div>
+            <div id="signinContent" class="content" >
+                <h1 id="signinText" class="title">
+                    sign in
+                </h1>
+                <p id="signinError" class="error"></p>
+                <input id="signinTelephone" class="search" placeholder="telephone" type="tel" tabindex="1" maxlength="4">
+                <input id="signinPIN" class="search" placeholder="4 digit pin" type="tel" tabindex="2" maxlength="4">
+                <a id="signinNextButton" class="button" data-role="button" tabindex="2" onclick="signinButtonClick()">sign in</a>
+            </div>
+        </div>
+
+        <div id="wherePage" class="page" data-role="page">
+            <div id="header">
+                <div id="headerControl" style="margin-top:15px;" class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+                    <a class="backButton" href="#welcomePage" ><---</a>
+                </div>
+            </div>
+            <div id="whereContent" class="content" >
+                <h1 id="whereText" class="title">
+                    where are you going?
+                </h1>
+                <div id="whereScroll">
+                    <input id="whereSearch0" class="search whereSearch" placeholder="destination" type="text" tabindex="1" >
+                    <div id="whereSpacer"></div>
+                </div>
+                <div id="whereSecondaryControl">
+                    <a id="moreButton" >add stop</a>
+                </div>
+                <!--<input id="whereSearchN" class="search" placeholder="destination" type="text" tabindex="1" >-->
+                <a id="whereNextButton" class="button" data-role="button" href="#whoPage" >next</a>
+            </div>
+        </div>
+
+        <div id="whoPage" class="page" data-role="page">
+            <div id="header">
+                <div id="headerControl" style="margin-top:15px;" class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+                    <a class="backButton" data-rel="back" ><---</a>
+                </div>
+            </div>
+            <div id="whoContent" class="content" >
+                <h1 id="whoText" class="title">
+                    who should we tell?
+                </h1>
+                <div id="whoScroll"></div>
+                <a id="whoNextButton" class="button" data-role="button" onclick="startButtonClick()">start</a>
+            </div>
+        </div>
+
+        <div id="virgilPage" class="page" data-role="page">
+            <div id="header">
+                <div id="headerControl" style="margin-top:15px;" class="ui-btn-left" data-role="controlgroup" data-type="horizontal">
+                    <a class="backButton" href="#whoPage" ><---</a>
+                </div>
+            </div>
+            <div id="virgilContent" class="content" >
+                
+            </div>
+        </div>
+
+    </body>
+</html>
