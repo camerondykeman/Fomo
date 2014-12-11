@@ -50,8 +50,6 @@ function Virgil(){
 		//find current destination and get location
 		$.each(places,  function(key,val){
 			if(!val.arrived){
-				var lat = val.geometry.k;
-				var lng = val.geometry.B;
 				destination = val;
 				return false;
 			}
@@ -323,7 +321,7 @@ function Virgil(){
 		//calc distance to destination
 		var distanceToTarget = -1;
 		var originLocation = new google.maps.LatLng(location.coords.latitude, location.coords.longitude);
-		var destinationLocation = new google.maps.LatLng(target.geometry.location.k, target.geometry.location.B);
+		var destinationLocation = target.geometry.location.B ? new google.maps.LatLng(target.geometry.location.k, target.geometry.location.B) : new google.maps.LatLng(target.geometry.location.k, target.geometry.location.D);
 		var service = new google.maps.DistanceMatrixService();
 		service.getDistanceMatrix({
 		    origins: [originLocation],

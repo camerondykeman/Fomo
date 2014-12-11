@@ -22,6 +22,7 @@ function initGoogleSearch(){
 	        		places = JSON.parse(sessionStorage.getItem("places"));
 	        	}
 	        	places[0] = results[0];
+	        	places[0].arrived = true;
 	        	sessionStorage.setItem("places", JSON.stringify(places));
             };
         });
